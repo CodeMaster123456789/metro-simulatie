@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#include "TicTacToe.h"
+#include "Metro.h"
 #include "TicTacToeUtils.h"
 #include "TicTacToeExporter.h"
 
@@ -27,7 +27,7 @@ protected:
 	virtual void TearDown() {
 	}
 
-	TicTacToe ttt_;
+	Metro ttt_;
 	TicTacToePlayer tttPlayer_;
 
 };
@@ -136,7 +136,7 @@ TEST_F(TicTactToeOutputTest, OutputNoWinner) {
 }
 
 
-void auxTestOutput (TicTacToe &game, const std::string expectedOutputFilename) {
+void auxTestOutput (Metro &game, const std::string expectedOutputFilename) {
 	TicTacToeExporter plainExporter;
 	TicTacToeHTMLExporter htmlExporter;
 	TicTacToeHTMLTablesIconExporter html2Exporter;
@@ -202,13 +202,13 @@ TEST_F(TicTactToeOutputTest, ExporterTestsContractViolations) {
 	myfile.open("testOutput/zzzOut.txt");
 	EXPECT_TRUE(plainExporter.properlyInitialized());
 	EXPECT_FALSE(plainExporter.documentStarted());
-	EXPECT_DEATH(plainExporter.exportOn(myfile, ttt_), "TicTacToeExporter wasn't in documentStarted when calling exportOn.");
+	EXPECT_DEATH(plainExporter.exportOn(myfile, ttt_), "MetroExporter wasn't in documentStarted when calling exportOn.");
 	plainExporter.documentStart(myfile);
 	EXPECT_TRUE(plainExporter.documentStarted());
 	plainExporter.exportOn(myfile, ttt_);
 	plainExporter.documentEnd(myfile);
 	EXPECT_FALSE(plainExporter.documentStarted());
-	EXPECT_DEATH(plainExporter.exportOn(myfile, ttt_), "TicTacToeExporter wasn't in documentStarted when calling exportOn.");
+	EXPECT_DEATH(plainExporter.exportOn(myfile, ttt_), "MetroExporter wasn't in documentStarted when calling exportOn.");
 	myfile.close();
 }
 

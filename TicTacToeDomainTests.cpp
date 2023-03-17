@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#include "TicTacToe.h"
+#include "Metro.h"
 
 class TicTactToeDomainTest: public ::testing::Test {
 protected:
@@ -21,7 +21,7 @@ protected:
 	// You should make the members protected s.t. they can be
 	// accessed from sub-classes.
 
-	TicTacToe ttt_;
+	Metro ttt_;
 	TicTacToePlayer tttPlayer_;
 
 };

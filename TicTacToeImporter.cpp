@@ -28,7 +28,7 @@ const std::string fetch_text(TiXmlNode *pElement, std::ostream& errStream) {
 //Below is a static member function but one cannot repeat the static keyword in the implementation
 
 SuccessEnum TicTacToeImporter::importTicTacToeGame(
-	const char * inputfilename, std::ostream& errStream, TicTacToe& game) {
+        const char * inputfilename, std::ostream& errStream, Metro& game) {
 	
 	TiXmlDocument doc;
 	SuccessEnum endResult = Success;
@@ -43,8 +43,8 @@ SuccessEnum TicTacToeImporter::importTicTacToeGame(
 	for(TiXmlElement* root = doc.FirstChildElement();
 			root != NULL; root = root->NextSiblingElement()) {
 		string rootName = root->Value();
-		if (rootName != "TicTacToe") {
-			errStream << "XML PARTIAL IMPORT: Expected <TicTacToe> ... </TicTactToe> and got <"
+		if (rootName != "Metro") {
+			errStream << "XML PARTIAL IMPORT: Expected <Metro> ... </TicTactToe> and got <"
 				<< rootName <<  "> ... </" << rootName << ">." << endl;
 			endResult = PartialImport;
 		} else {

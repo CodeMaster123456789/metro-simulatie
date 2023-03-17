@@ -13,7 +13,7 @@
 
 
 #include <iostream>
-#include "TicTacToe.h"
+#include "Metro.h"
 
 
 enum SuccessEnum {ImportAborted, PartialImport, Success};
@@ -32,7 +32,7 @@ public:
 //\n REQUIRE(game.properlyInitialized(), "game wasn't initialized when passed to TicTacToeImporterimportTicTacToeGame");
 //
 */
-static SuccessEnum importTicTacToeGame(const char * inputfilename, std::ostream& errStream, TicTacToe& game);
+static SuccessEnum importTicTacToeGame(const char * inputfilename, std::ostream& errStream, Metro& game);
 
 };
 

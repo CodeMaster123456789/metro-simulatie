@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#include "TicTacToe.h"
+#include "Metro.h"
 #include "TicTacToeUtils.h"
 #include "TicTacToeImporter.h"
 
@@ -27,7 +27,7 @@ protected:
 	virtual void TearDown() {
 	}
 
-	TicTacToe ttt_;	
+	Metro ttt_;
 };
 
 /**
@@ -41,10 +41,10 @@ TEST_F(TicTactToeInputTest, InputHappyDay) {
 
 	myfile.open("testInput/zzzInput.xml");
 	myfile << "<?xml version=\"1.0\" ?>" << endl
-		<< "<TicTacToe>" << endl
+		<< "<Metro>" << endl
 		<< "\t<MOVES_O>a1c1b2a3c3</MOVES_O>" << endl
 		<< "\t<MOVES_X>b1a2c2b3</MOVES_X>" << endl
-		<< "</TicTacToe>" << endl;
+		<< "</Metro>" << endl;
 	myfile.close();
 	myfile.open("testInput/zzzError.txt");
 	importResult = TicTacToeImporter::importTicTacToeGame("testInput/zzzInput.xml", myfile, ttt_);
