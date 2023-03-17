@@ -5,10 +5,11 @@
 
 
 #include <iostream>
+#include "vector"
 
+#include "Station.h"
 
-class Metro; // forward declaration
-
+using namespace std;
 
 class Metro {
 public:
@@ -27,6 +28,7 @@ public:
 
 private:
 	Metro * _initCheck; //!use pointer to myself to verify whether I am properly initialized
+	vector<Station *> station_netwerk;
 
 };
 

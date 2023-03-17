@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(TicTacToe)
+project(Metro_simulatie)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "-std=c++98 -Wall -Werror -O0")
@@ -20,7 +20,7 @@ set(SOURCE_FILES
         src/MetroUtils.cpp
         src/Metro.cpp
         src/MetroImporter.cpp
-        src/MetroExporter.cpp)
+        src/MetroExporter.cpp src/Station.cpp src/Station.h)
 
 # Set source files for RELEASE target
 set(RELEASE_SOURCE_FILES
