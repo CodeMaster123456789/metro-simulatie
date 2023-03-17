@@ -1,14 +1,11 @@
 #include <iostream>
 #include "Metro.h"
-#include "TicTacToeExporter.h"
+#include "MetroImporter.h"
 
 using namespace std;
 
 int main(int argc, char **argv) {
-	Metro ttt;
-	TicTacToeHTMLTablesIconExporter exporter;
-	
-	exporter.documentStart(cout);
-
-	exporter.documentEnd(cout);
+	Metro simulatie;
+    MetroImporter importer;
+    importer.importMetro("testInput/test.xml",cerr,simulatie);
 }

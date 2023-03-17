@@ -14,8 +14,8 @@
 using namespace std;
 
 #include "Metro.h"
-#include "TicTacToeUtils.h"
-#include "TicTacToeImporter.h"
+#include "MetroUtils.h"
+#include "MetroImporter.h"
 
 class TicTactToeInputTest: public ::testing::Test {
 protected:
@@ -47,7 +47,7 @@ TEST_F(TicTactToeInputTest, InputHappyDay) {
 		<< "</Metro>" << endl;
 	myfile.close();
 	myfile.open("testInput/zzzError.txt");
-	importResult = TicTacToeImporter::importTicTacToeGame("testInput/zzzInput.xml", myfile, ttt_);
+	importResult = MetroImporter::importMetro("testInput/zzzInput.xml", myfile, ttt_);
 	myfile.close();
 	EXPECT_TRUE(importResult == Success);
 
@@ -82,7 +82,7 @@ TEST_F(TicTactToeInputTest, InputLegalGames) {
 	
 	while (FileExists (fileName)) {
 		myfile.open("testInput/zzzError.txt");
-		importResult = TicTacToeImporter::importTicTacToeGame(fileName.c_str(), myfile, ttt_);
+		importResult = MetroImporter::importMetro(fileName.c_str(), myfile, ttt_);
 		myfile.close();
 		EXPECT_TRUE(importResult == Success);
 		EXPECT_TRUE(FileIsEmpty("testInput/zzzError.txt"));
@@ -105,7 +105,7 @@ TEST_F(TicTactToeInputTest, InputXMLSyntaxErrors) {
 	
 	while (FileExists (fileName)) {
 		myfile.open("testInput/zzzError.txt");
-		importResult = TicTacToeImporter::importTicTacToeGame(fileName.c_str(), myfile, ttt_);
+		importResult = MetroImporter::importMetro(fileName.c_str(), myfile, ttt_);
 		myfile.close();
 		EXPECT_TRUE(importResult == ImportAborted);
 		errorfileName = "testInput/xmlsyntaxerror" + to_string(fileCounter) + ".txt";	
@@ -129,7 +129,7 @@ TEST_F(TicTactToeInputTest, InputIllegalGames) {
 	
 	while (FileExists (fileName)) {
 		myfile.open("testInput/zzzError.txt");
-		importResult = TicTacToeImporter::importTicTacToeGame(fileName.c_str(), myfile, ttt_);
+		importResult = MetroImporter::importMetro(fileName.c_str(), myfile, ttt_);
 		myfile.close();
 		EXPECT_TRUE(importResult == PartialImport);
 		errorfileName = "testInput/illegalError" + to_string(fileCounter) + ".txt";	

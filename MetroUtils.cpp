@@ -1,18 +1,10 @@
-//============================================================================
-// Name        : TicTacToeUtils.cpp
-// Author      : Serge Demeyer
-// Version     :
-// Copyright   : Project Software Engineering - BA1 Informatica - Serge Demeyer - University of Antwerp
-// Description : TicTactToe in C++, Ansi-style
-//============================================================================
-
 #include <iostream>
 #include <fstream>
 #include <sys/stat.h>
 
 using namespace std;
 
-#include "TicTacToeUtils.h"
+#include "MetroUtils.h"
 
 /**
 Auxiliary functions for file manipulation.
@@ -25,7 +17,7 @@ bool DirectoryExists(const std::string dirname) {
 bool FileExists(const std::string filename) {
 	struct stat st;
 	if (stat(filename.c_str(), &st) != 0) return false;
-	ifstream f(filename);
+	ifstream f(filename.c_str());
     if (f.good()) {
         f.close();
         return true;
@@ -47,11 +39,11 @@ bool FileCompare(const std::string leftFileName, const std::string rightFileName
 	bool result;
 
 	// Open the two files.
-	leftFile.open(leftFileName);
+	leftFile.open(leftFileName.c_str());
 	if (!leftFile.is_open()) {
 		return false;
 	};
-	rightFile.open(rightFileName);
+	rightFile.open(rightFileName.c_str());
 	if (!rightFile.is_open()) {
 		leftFile.close();
 		return false;

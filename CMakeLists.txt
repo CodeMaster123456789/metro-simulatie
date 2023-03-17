@@ -9,17 +9,17 @@ set(SOURCE_FILES
         DesignByContract.h
         tinystr.h
         tinyxml.h
-        TicTacToeUtils.h
+        MetroUtils.h
         Metro.h
-        TicTacToeImporter.h
+        MetroImporter.h
         MetroExporter.h
         tinystr.cpp
         tinyxml.cpp
         tinyxmlerror.cpp
         tinyxmlparser.cpp
-        TicTacToeUtils.cpp
+        MetroUtils.cpp
         Metro.cpp
-        TicTacToeImporter.cpp
+        MetroImporter.cpp
         MetroExporter.cpp)
 
 # Set source files for RELEASE target

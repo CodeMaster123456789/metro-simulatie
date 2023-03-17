@@ -14,7 +14,7 @@
 using namespace std;
 
 #include "Metro.h"
-#include "TicTacToeUtils.h"
+#include "MetroUtils.h"
 #include "TicTacToeExporter.h"
 
 class TicTactToeOutputTest: public ::testing::Test {
