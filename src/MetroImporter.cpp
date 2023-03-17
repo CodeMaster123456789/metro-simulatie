@@ -1,6 +1,6 @@
-#include "DesignByContract.h"
+#include "../lib/DesignByContract.h"
 #include "MetroImporter.h"
-#include "tinyxml.h"
+#include "../lib/tinyxml.h"
 
 using namespace std;
 

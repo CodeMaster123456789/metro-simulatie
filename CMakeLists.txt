@@ -1,26 +1,26 @@
 cmake_minimum_required(VERSION 3.15)
 project(TicTacToe)
 
-set(CMAKE_CXX_STANDARD 98)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "-std=c++98 -Wall -Werror -O0")
 set(CMAKE_EXE_LINKER_FLAGS -pthread)
 
 set(SOURCE_FILES
-        DesignByContract.h
-        tinystr.h
-        tinyxml.h
-        MetroUtils.h
-        Metro.h
-        MetroImporter.h
-        MetroExporter.h
-        tinystr.cpp
-        tinyxml.cpp
-        tinyxmlerror.cpp
-        tinyxmlparser.cpp
-        MetroUtils.cpp
-        Metro.cpp
-        MetroImporter.cpp
-        MetroExporter.cpp)
+        lib/DesignByContract.h
+        lib/tinystr.h
+        lib/tinyxml.h
+        src/MetroUtils.h
+        src/Metro.h
+        src/MetroImporter.h
+        src/MetroExporter.h
+        lib/tinystr.cpp
+        lib/tinyxml.cpp
+        lib/tinyxmlerror.cpp
+        lib/tinyxmlparser.cpp
+        src/MetroUtils.cpp
+        src/Metro.cpp
+        src/MetroImporter.cpp
+        src/MetroExporter.cpp)
 
 # Set source files for RELEASE target
 set(RELEASE_SOURCE_FILES
@@ -30,7 +30,7 @@ add_executable(MetroMain ${SOURCE_FILES} ${RELEASE_SOURCE_FILES})
 
 # Set source files for TEST target
 set(TEST_SOURCE_FILES
-        TicTacToeTests.cpp)
+        MetroTests.cpp)
 
 # Create TEST target
 add_executable(MetroTests ${SOURCE_FILES} ${TEST_SOURCE_FILES})

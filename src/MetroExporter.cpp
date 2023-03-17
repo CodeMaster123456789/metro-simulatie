@@ -1,4 +1,4 @@
-#include "DesignByContract.h"
+#include "../lib/DesignByContract.h"
 #include "MetroExporter.h"
 
 using namespace std;
