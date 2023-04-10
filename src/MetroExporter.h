@@ -18,6 +18,7 @@ public:
 	MetroExporter ();
 
 	bool properlyInitialized();
+    void simpleUitvoer(string pad, Metro & simulatie);
 
 private:
 	MetroExporter * _initCheck; //!use pointer to myself to verify whether I am properly initialized

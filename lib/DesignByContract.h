@@ -1,11 +1,3 @@
-//============================================================================
-// Name        : DesignByContract.h
-// Author      : Serge Demeyer
-// Version     :
-// Copyright   : Project Software Engineering - BA1 Informatica - Serge Demeyer - University of Antwerp
-// Description : Declarations for design by contract in C++
-//============================================================================
-
 #include <assert.h>
 
 #if defined(__MINGW32__)

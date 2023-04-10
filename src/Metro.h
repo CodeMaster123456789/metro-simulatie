@@ -8,11 +8,43 @@
 #include "vector"
 
 #include "Station.h"
+#include "Tram.h"
 
 using namespace std;
 
 class Metro {
 public:
+
+    /**
+     *
+     * @param s
+     */
+    void addStation(Station * s);
+
+    /**
+     *
+     * @param naam
+     * @return
+     */
+    Station * findStation(string naam);
+
+    /**
+     *
+     * @param t
+     */
+    void addTram(Tram * t);
+
+    /**
+     *
+     * @return
+     */
+    const vector<Station *> & getStationen();
+
+    /**
+     *
+     * @return
+     */
+    const vector<Tram *> & getTrammen();
 /**
 \n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 */
@@ -28,7 +60,8 @@ public:
 
 private:
 	Metro * _initCheck; //!use pointer to myself to verify whether I am properly initialized
-	vector<Station *> station_netwerk;
+	vector<Station *> stationen;
+    vector<Tram *> trammen;
 
 };
 

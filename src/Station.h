@@ -11,11 +11,21 @@ using namespace std;
 
 class Station {
 private:
-    string naam;
+    string naam;                                                    // hier zitten al de variabelen die nodig zijn voor Station
     Station * volgende;
     Station * vorige;
     int spoorNr;
 public:
+    Station();                                                      // dit zijn extra functies
+    Station(string naam, int spoorNr);                              // die gebruiken we om onze output makelijker te laten printen
+    void setSpoorNr(int spoor);
+    int getSpoorNr();
+    void setNaam(string naam);
+    string getNaam();
+    void setVolgende(Station * next);
+    Station * getVolgende();
+    void setVorige(Station * previous);
+    Station * getVorige();
 };
 
 

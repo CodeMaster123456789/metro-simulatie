@@ -20,7 +20,7 @@ set(SOURCE_FILES
         src/MetroUtils.cpp
         src/Metro.cpp
         src/MetroImporter.cpp
-        src/MetroExporter.cpp src/Station.cpp src/Station.h)
+        src/MetroExporter.cpp src/Station.cpp src/Station.h src/Tram.cpp src/Tram.h)
 
 # Set source files for RELEASE target
 set(RELEASE_SOURCE_FILES
