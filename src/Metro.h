@@ -45,6 +45,13 @@ public:
      * @return
      */
     const vector<Tram *> & getTrammen();
+
+    void moveTrams();
+
+    int getTijd();
+
+    void simulate(int eindtijd);
+
 /**
 \n ENSURE(properlyInitialized(), "constructor must end in properlyInitialized state");
 */
@@ -62,7 +69,7 @@ private:
 	Metro * _initCheck; //!use pointer to myself to verify whether I am properly initialized
 	vector<Station *> stationen;
     vector<Tram *> trammen;
-
+    int tijdstip = 0;
 };
 
 

@@ -14,6 +14,13 @@ Metro::Metro() {
 void Metro::reset() {
 	REQUIRE(this->properlyInitialized(), "Metro wasn't initialized when calling setMoves");
 
+    tijdstip = 0;
+
+    for (size_t i = 0; i < trammen.size();i++) {
+        Tram * huidigetram = trammen[i];
+        huidigetram->reset();
+    }
+
 	ENSURE(properlyInitialized(),
 			"constructor must end in properlyInitialized state");
 }
@@ -47,4 +54,24 @@ const vector<Station *> & Metro::getStationen() {               // geeft de Stat
 
 const vector<Tram *> & Metro::getTrammen() {                    // geeft de Tram weer.
     return this->trammen;
+}
+
+void Metro::moveTrams() {
+    for (size_t i = 0; i < trammen.size();i++) {
+        Tram * huidigetram = trammen[i];
+        huidigetram->move();
+    }
+}
+
+int Metro::getTijd() {
+    return tijdstip;
+}
+
+void Metro::simulate(int eindtijd) {
+    while (tijdstip < eindtijd) {
+        cout << "=== " << getTijd() << " ===" << endl;
+        moveTrams();
+        tijdstip++;
+        cout << endl;
+    }
 }

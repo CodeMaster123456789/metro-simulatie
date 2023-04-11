@@ -3,6 +3,9 @@
 //
 
 #include "Station.h"
+#include "Metro.h"
+
+Metro * Station::sim = nullptr;
 
 Station::Station() {                                                    // deze gegevens zet ik als mijn defaults.
     this->naam = "";
@@ -49,3 +52,24 @@ void Station::setVorige(Station *previous) {                            // hier 
 Station *Station::getVorige() {                                         // Als ik dit oproep geeft het mij de text voor vorige weer.
     return this->vorige;
 }
+
+void Station::setType(string t) {
+    this->type = t;
+}
+
+string Station::getType() {
+    return this->type;
+}
+
+Tram *Station::getHuidigeTram() {
+    vector<Tram *> trams = sim->getTrammen();
+    for (size_t i = 0; i < trams.size() ; ++i) {
+        Tram * huidigetram = trams [i];
+        if (huidigetram->getHuidigeStation() == this){
+            return huidigetram;
+        }
+
+    }
+    return nullptr;
+}
+

@@ -21,7 +21,10 @@ using namespace std;
 
 SuccessEnum MetroImporter::importMetro(
         const char * inputfilename, std::ostream& errStream, Metro& simulatie) {
-	
+
+    Tram::sim = & simulatie;
+    Station::sim = & simulatie;
+
 	TiXmlDocument doc;
 	SuccessEnum endResult = Success;
 
@@ -39,13 +42,15 @@ SuccessEnum MetroImporter::importMetro(
         if (Elementnaam == "STATION") {                                          // Als er van boven Metro staat noemen we dat de root van de file.
                                                                                  // Daarna komt het volgende element.
             string naam = child->FirstChildElement("naam")->GetText();     // Dat element noemt men de Child.
-            string spoor = child->FirstChildElement("spoorNr")->GetText();// Onder de Child komen dan de variabelen die we moeten benoemen.
+            string spoor = child->FirstChildElement("spoorNr")->GetText(); // Onder de Child komen dan de variabelen die we moeten benoemen.
+            string type = child->FirstChildElement("type")->GetText();
             int spoornummer = stoi(spoor);                                   // Hiervoor gaan we ze eerst alles benoemen tot wat ze behoren.
             Station * s = simulatie.findStation(naam);                           // We zeggen dan bijvoorbeeld dat na de Naam gedeelte zijn argumeng komt.
             if (s == nullptr) {                                                  // en zo voor al de variabelen.
                 s = new Station(naam,spoornummer);
                 simulatie.addStation(s);
             }
+            s->setType(type);
             string volgende = child->FirstChildElement("volgende")->GetText();
             string vorige = child->FirstChildElement("vorige")->GetText();
             Station * vol = simulatie.findStation(volgende);
@@ -63,18 +68,31 @@ SuccessEnum MetroImporter::importMetro(
         }
         if (Elementnaam == "TRAM") {
             string lijnNr = child->FirstChildElement("lijnNr")->GetText();                  // Hetzelfde doen we voor de child element Tram
-            string snelheid = child->FirstChildElement("snelheid")->GetText();              // Dan benoemen we al de variabelen voor de Child Tram.
+            string type = child->FirstChildElement("type")->GetText();              // Dan benoemen we al de variabelen voor de Child Tram.
             int lijn = stoi(lijnNr);                                                          // we benoemen ze eerst
-            int km_h = stoi(snelheid);                                                        // dan voegen we de bijbehoorende argument toe
+                                                                                            // dan voegen we de bijbehoorende argument toe
             string beginStation = child->FirstChildElement("beginStation")->GetText();
             Station * t = simulatie.findStation(beginStation);
             if (t == nullptr) {
                 t = new Station(beginStation, lijn);
                 simulatie.addStation(t);
             }
-            Tram * tram = new Tram(lijn,km_h);
+
+            TiXmlElement * defectElement = child->FirstChildElement("aantalDefecten");
+            TiXmlElement * reparatieElement = child->FirstChildElement("reparatieTijd");
+
+            Tram * tram = new Tram(lijn);
+
+            if (defectElement != nullptr and reparatieElement != nullptr) {
+                int defecten = stoi(defectElement->GetText());
+                int reparatie = stoi(reparatieElement->GetText());
+                tram->setMaxDefecten(defecten);
+                tram->setMaxReparatieDuur(reparatie);
+            }
+
             tram->setBeginstation(t);
             tram->setHuidigeStation(t);
+            tram->setType(type);
             simulatie.addTram(tram);
         }
 

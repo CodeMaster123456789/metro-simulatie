@@ -9,6 +9,9 @@ int main(int argc, char **argv) {
 	Metro simulatie;
     MetroImporter importer;
     importer.importMetro("testInput/test.xml",cerr,simulatie);
+
+    simulatie.simulate(30);
+
     MetroExporter exporter;
     exporter.simpleUitvoer("output/test.txt",simulatie);
 }

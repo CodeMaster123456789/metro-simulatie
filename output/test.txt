@@ -1,17 +1,32 @@
-Station A
-<- Station C
--> Station B
-Spoor 12
+--== STATIONS ==--
+= Station A = 
+* Spoor 15:
+     <- Station D
+     -> Station B
 
-Station B
-<- Station A
--> Station C
-Spoor 12
+= Station B = 
+* Spoor 15:
+     <- Station A
+     -> Station C
 
-Station C
-<- Station B
--> Station A
-Spoor 12
+= Station D = 
+* Spoor 15:
+     <- Station C
+     -> Station A
 
-Tram 12 in Station A
+= Station C = 
+* Spoor 15:
+     <- Station B
+     -> Station D
 
+
+--== TRAMS ==--
+Tram 9
+     type: PCC
+     snelheid: 40
+     huidigestation: D
+
+Tram 15
+     type: Stadslijner
+     snelheid: 70
+     huidigestation: C
