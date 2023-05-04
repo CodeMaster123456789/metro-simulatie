@@ -5,15 +5,28 @@
 #include "Tram.h"
 #include "Station.h"
 #include "Metro.h"
+#include "../lib/DesignByContract.h"
 
 Metro * Tram::sim = nullptr;
 
 Tram::Tram(int lijnNr, int aantalDefecten, int reparatieTijd) {
+
+    REQUIRE(lijnNr >= 0, "LijnNr moet een positieve getal zijn");
+    REQUIRE(aantalDefecten != 0, "aantaldefecten mag niet 0 zijn");
+    REQUIRE(reparatieTijd >= 0, "reparatietijd mag niet negatief zijn");
+
     this->lijnNr = lijnNr;
     this->beginStation = nullptr;
     this->huidigeStation = nullptr;
     this->maxDefecten = aantalDefecten;
     this->maxReparatieDuur = reparatieTijd;
+
+    ENSURE(this->lijnNr == lijnNr, "lijnNR is correct ingestelt");
+    ENSURE(this->maxDefecten == aantalDefecten, "maxDefecten is correct ingestelt");
+    ENSURE(this->maxReparatieDuur == reparatieTijd, "maxReparatieDuur is correct ingestelt");
+    ENSURE(this->beginStation == nullptr, "tram heeft geen beginstation");
+    ENSURE(this->huidigeStation == nullptr, "tram heeft geen huidigestation");
+
 }
 
 Tram::Tram() {

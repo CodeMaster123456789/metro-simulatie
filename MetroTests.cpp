@@ -5,10 +5,11 @@
 
 using namespace std;
 
-#include "src/Metro.h"
-#include "test/MetroDomainTests.cpp"
-#include "test/MetroOutputTests.cpp"
-#include "test/MetroInputTests.cpp"
+//#include "src/Metro.h"
+//#include "test/MetroDomainTests.cpp"
+//#include "test/MetroOutputTests.cpp"
+//#include "test/MetroInputTests.cpp"
+//#include "test/TramTest.cpp"
 
 
 int main(int argc, char **argv) {

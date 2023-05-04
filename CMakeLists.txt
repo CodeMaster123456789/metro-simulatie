@@ -30,7 +30,11 @@ add_executable(MetroMain ${SOURCE_FILES} ${RELEASE_SOURCE_FILES})
 
 # Set source files for TEST target
 set(TEST_SOURCE_FILES
-        MetroTests.cpp)
+        MetroTests.cpp
+        test/TramTest.cpp
+        test/MetroDomainTests.cpp
+        test/MetroInputTests.cpp
+        test/MetroOutputTests.cpp)
 
 # Create TEST target
 add_executable(MetroTests ${SOURCE_FILES} ${TEST_SOURCE_FILES})

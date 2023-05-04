@@ -14,7 +14,8 @@ class Metro;
 using namespace std;
 
 
-class Tram {                                                                // hier geef ik alle variabelen weer voor Tram
+class Tram {
+    // hier geef ik alle variabelen weer voor Tram
 private:
     int lijnNr;
     Station * beginStation;
@@ -30,9 +31,32 @@ public:
 
     static Metro * sim;
 
+
+    /**
+     * Tram constructor
+     *
+     * @param lijnNr lijnnummer van de tram
+     * @param aantalDefecten om de hoeveel station valt de tram in panne,als dit negatief is valt de tram nooit in panne
+     * @param reparatieTijd na hoeveel tijd is de tram gerepareerd
+     *
+     * REQUIRE(lijnNr >= 0, "LijnNr moet een positieve getal zijn");
+     * REQUIRE(aantalDefecten != 0, "aantaldefecten mag niet 0 zijn");
+     * REQUIRE(reparatieTijd >= 0, "reparatietijd mag niet negatief zijn");
+     *
+     * ENSURE(this->lijnNr == lijnNr, "lijnNR is correct ingestelt");
+     * ENSURE(this->maxDefecten == aantalDefecten, "maxDefecten is correct ingestelt");
+     * ENSURE(this->maxReparatieDuur == reparatieTijd, "maxReparatieDuur is correct ingestelt");
+     * ENSURE(this->beginStation == nullptr, "tram heeft geen beginstation");
+     * ENSURE(this->huidigeStation == nullptr, "tram heeft geen huidigestation");
+     *
+     */
     Tram(int lijnNr, int aantalDefecten = -1, int reparatieTijd = 0);                                         // ectra functies die ik ga gebruiken voor de variabelen.
     Tram();
     void setLijnNr(int lijn);
+    /**
+     *
+     * @return lijnNR nummer van de lijn
+     */
     int getLijnNr();
     int getSnelheid();
     void setBeginstation(Station * beginpunt);
