@@ -31,10 +31,9 @@ public:
 
     static Metro * sim;
 
-
     /**
      * Tram constructor
-     *
+     *s
      * @param lijnNr lijnnummer van de tram
      * @param aantalDefecten om de hoeveel station valt de tram in panne,als dit negatief is valt de tram nooit in panne
      * @param reparatieTijd na hoeveel tijd is de tram gerepareerd
@@ -50,15 +49,44 @@ public:
      * ENSURE(this->huidigeStation == nullptr, "tram heeft geen huidigestation");
      *
      */
+
     Tram(int lijnNr, int aantalDefecten = -1, int reparatieTijd = 0);                                         // ectra functies die ik ga gebruiken voor de variabelen.
+
+    /**
+    * Tram constructor zonder een argument
+    * ENSURE(this->lijnNr == lijnNr,"lijnNr heeft een standaard constante -1")
+    * ENSURE(this->beginStation == nullprt,"tram heeft geen beginstation")
+    * ENSURE(this->huidigeStation == nullprt,"tram heeft geen huidigeStation")
+    */
+
     Tram();
-    void setLijnNr(int lijn);
+
     /**
      *
-     * @return lijnNR nummer van de lijn
+     * @return lijnNr nummer van de lijn
      */
+
+    void setLijnNr(int lijn);
+
+    /**
+     *
+     * @return lijnNr nummer van de lijn
+     */
+
     int getLijnNr();
+
+    /**
+     *
+     * @return lijnNr nummer van de lijn
+     */
+
     int getSnelheid();
+
+    /**
+     *
+     * @param beginpunt
+     */
+
     void setBeginstation(Station * beginpunt);
     Station * getBeginstation();
     void setHuidigeStation(Station * startpunt);
