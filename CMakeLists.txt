@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 98)
 set(CMAKE_CXX_FLAGS "-std=c++98 -Wall -Werror -O0")
 set(CMAKE_EXE_LINKER_FLAGS -pthread)
 
+include_directories(gtest/include)
+link_directories(gtest/lib)
 set(SOURCE_FILES
         lib/DesignByContract.h
         lib/tinystr.h
@@ -41,7 +43,6 @@ add_executable(MetroTests ${SOURCE_FILES} ${TEST_SOURCE_FILES})
 
 
 # googletest subproject
-add_subdirectory(googletest)
-include_directories(googletest/googletest/include)
+
 # Specify that Tests relies on "gtest" Link library
 target_link_libraries(MetroTests gtest)

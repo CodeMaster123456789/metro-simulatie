@@ -23,8 +23,8 @@ Tests the constructor.
 TEST_F(TramTest, ConstructorTest) {
     t = Tram(1,-1,1);
     EXPECT_TRUE(t.getLijnNr() == 1);
-    EXPECT_TRUE(t.getHuidigeStation() == nullptr);
-    EXPECT_TRUE(t.getBeginstation() == nullptr);
+    EXPECT_TRUE(t.getHuidigeStation() == NULL);
+    EXPECT_TRUE(t.getBeginstation() == NULL);
 
     EXPECT_DEATH(Tram(-1,-1,0),"LijnNr moet een positieve getal zijn");
     EXPECT_DEATH(Tram(1,0,0),"aantaldefecten mag niet 0 zijn");

@@ -52,8 +52,7 @@ void Tram::setLijnNr(int lijn) {
 
     this->lijnNr = lijn;
 
-    ENSURE(this->lijnNr ==
-           ,"lijn moet een positieve getal hebben");
+    ENSURE(getLijnNr() == lijn,"lijn moet een positieve getal hebben");
 }
 
 int Tram::getLijnNr() {
