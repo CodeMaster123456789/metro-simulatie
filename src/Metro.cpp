@@ -45,7 +45,7 @@ Station *Metro::findStation(string naam) {                      // het zoekt naa
             return s;
         }
     }
-    return nullptr;
+    return NULL;
 }
 
 const vector<Station *> & Metro::getStationen() {               // geeft de Station weer.

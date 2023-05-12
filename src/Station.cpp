@@ -5,20 +5,20 @@
 #include "Station.h"
 #include "Metro.h"
 
-Metro * Station::sim = nullptr;
+Metro * Station::sim = NULL;
 
 Station::Station() {                                                    // deze gegevens zet ik als mijn defaults.
     this->naam = "";
     this->spoorNr = -1;
-    this->volgende = nullptr;
-    this->vorige = nullptr;
+    this->volgende = NULL;
+    this->vorige = NULL;
 }
 
 Station::Station(string naam, int spoorNr) {                            // hier geeft ik de gegevens een beginwaarde weer.
     this->naam = naam;
     this->spoorNr = spoorNr;
-    this->volgende = nullptr;
-    this->vorige = nullptr;
+    this->volgende = NULL;
+    this->vorige = NULL;
 }
 
 void Station::setSpoorNr(int spoor) {                                   // hier noem ik spoor als het argument voor spoorNr.
@@ -70,6 +70,6 @@ Tram *Station::getHuidigeTram() {
         }
 
     }
-    return nullptr;
+    return NULL;
 }
 

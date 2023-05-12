@@ -21,10 +21,10 @@ private:
     Station * beginStation;
     Station * huidigeStation;
     string type;
-    int maxDefecten = -1;
-    int aantalDefecten = 0;
-    int maxReparatieDuur = 0;
-    int reparatieDuur = 0;
+    int maxDefecten;
+    int aantalDefecten;
+    int maxReparatieDuur;
+    int reparatieDuur;
     Station * getNextValidStation();
     bool padIsVrij(Station *k);
 public:

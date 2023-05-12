@@ -16,7 +16,7 @@ bool MetroExporter::properlyInitialized() {
 	return _initCheck == this;
 }
 
-void MetroExporter::simpleUitvoer(string pad, Metro &simulatie) {                   // dit geld voor de gedeelte van Station.
+void MetroExporter::simpleUitvoer(const char *pad, Metro &simulatie) {                   // dit geld voor de gedeelte van Station.
     ofstream MyFile(pad);                                                        // hier zegen we hoe de programma gelijk als op aade XLM file moet lezen.
     MyFile << "--== STATIONS ==--" << endl;
     for (size_t i = 0; i < simulatie.getStationen().size();i++) {                   // we zeggen eerst wat de child element.

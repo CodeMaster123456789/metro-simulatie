@@ -7,7 +7,7 @@
 #include "Metro.h"
 #include "../lib/DesignByContract.h"
 
-Metro * Tram::sim = nullptr;
+Metro * Tram::sim = NULL;
 
 Tram::Tram(int lijnNr, int aantalDefecten, int reparatieTijd) {
 
@@ -16,28 +16,34 @@ Tram::Tram(int lijnNr, int aantalDefecten, int reparatieTijd) {
     REQUIRE(reparatieTijd >= 0, "reparatietijd mag niet negatief zijn");
 
     this->lijnNr = lijnNr;
-    this->beginStation = nullptr;
-    this->huidigeStation = nullptr;
+    this->beginStation = NULL;
+    this->huidigeStation = NULL;
+    this->aantalDefecten = 0;
+    this->reparatieDuur = 0;
     this->maxDefecten = aantalDefecten;
     this->maxReparatieDuur = reparatieTijd;
 
     ENSURE(this->lijnNr == lijnNr, "lijnNR is correct ingestelt");
     ENSURE(this->maxDefecten == aantalDefecten, "maxDefecten is correct ingestelt");
     ENSURE(this->maxReparatieDuur == reparatieTijd, "maxReparatieDuur is correct ingestelt");
-    ENSURE(this->beginStation == nullptr, "tram heeft geen beginstation");
-    ENSURE(this->huidigeStation == nullptr, "tram heeft geen huidigestation");
+    ENSURE(this->beginStation == NULL, "tram heeft geen beginstation");
+    ENSURE(this->huidigeStation == NULL, "tram heeft geen huidigestation");
 
 }
 
 Tram::Tram() {
 
     this->lijnNr = -1;
-    this->beginStation = nullptr;
-    this->huidigeStation = nullptr;
+    this->beginStation = NULL;
+    this->huidigeStation = NULL;
+    this-> maxDefecten = -1;
+    this-> aantalDefecten = 0;
+    this-> maxReparatieDuur = 0;
+    this-> reparatieDuur = 0;
 
     ENSURE(this->lijnNr == -1,"lijnNr heeft een standaard constante -1");
-    ENSURE(this->beginStation == nullptr, "tram heeft geen beginstation");
-    ENSURE(this->huidigeStation == nullptr, "tram heeft geen huidigestation");
+    ENSURE(this->beginStation == NULL, "tram heeft geen beginstation");
+    ENSURE(this->huidigeStation == NULL, "tram heeft geen huidigestation");
 }
 
 void Tram::setLijnNr(int lijn) {
@@ -46,7 +52,8 @@ void Tram::setLijnNr(int lijn) {
 
     this->lijnNr = lijn;
 
-    ENSURE(this->lijnNr == lijn,"lijn moet een positieve getal hebben");
+    ENSURE(this->lijnNr ==
+           ,"lijn moet een positieve getal hebben");
 }
 
 int Tram::getLijnNr() {
@@ -149,7 +156,7 @@ bool Tram::padIsVrij(Station *k) {
 
     Station * huidige = this->getHuidigeStation()->getVolgende();
     while (huidige != k->getVolgende()) {
-        if (huidige->getHuidigeTram() != nullptr) {
+        if (huidige->getHuidigeTram() != NULL) {
             return false;
         }
         huidige = huidige->getVolgende();
