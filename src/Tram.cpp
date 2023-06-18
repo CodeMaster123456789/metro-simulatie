@@ -6,26 +6,19 @@
 #include "Station.h"
 #include "Metro.h"
 #include "../lib/DesignByContract.h"
+#include "MetroExporter.h"
 
 Metro * Tram::sim = NULL;
 
-Tram::Tram(int lijnNr, int aantalDefecten, int reparatieTijd) {
+Tram::Tram(int lijnNr) {
 
     REQUIRE(lijnNr >= 0, "LijnNr moet een positieve getal zijn");
-    REQUIRE(aantalDefecten != 0, "aantaldefecten mag niet 0 zijn");
-    REQUIRE(reparatieTijd >= 0, "reparatietijd mag niet negatief zijn");
 
     this->lijnNr = lijnNr;
     this->beginStation = NULL;
     this->huidigeStation = NULL;
-    this->aantalDefecten = 0;
-    this->reparatieDuur = 0;
-    this->maxDefecten = aantalDefecten;
-    this->maxReparatieDuur = reparatieTijd;
 
-    ENSURE(this->lijnNr == lijnNr, "lijnNR is correct ingestelt");
-    ENSURE(this->maxDefecten == aantalDefecten, "maxDefecten is correct ingestelt");
-    ENSURE(this->maxReparatieDuur == reparatieTijd, "maxReparatieDuur is correct ingestelt");
+    ENSURE(getLijnNr() == lijnNr, "lijnNR is correct ingestelt");
     ENSURE(this->beginStation == NULL, "tram heeft geen beginstation");
     ENSURE(this->huidigeStation == NULL, "tram heeft geen huidigestation");
 
@@ -36,10 +29,6 @@ Tram::Tram() {
     this->lijnNr = -1;
     this->beginStation = NULL;
     this->huidigeStation = NULL;
-    this-> maxDefecten = -1;
-    this-> aantalDefecten = 0;
-    this-> maxReparatieDuur = 0;
-    this-> reparatieDuur = 0;
 
     ENSURE(this->lijnNr == -1,"lijnNr heeft een standaard constante -1");
     ENSURE(this->beginStation == NULL, "tram heeft geen beginstation");
@@ -51,15 +40,13 @@ void Tram::setLijnNr(int lijn) {
     REQUIRE(lijn >= 0,"lijn is de nummer van de tram");
 
     this->lijnNr = lijn;
-
-    ENSURE(getLijnNr() == lijn,"lijn moet een positieve getal hebben");
 }
 
 int Tram::getLijnNr() {
 
     return this->lijnNr;
 
-    ENSURE(this->lijnNr == lijnNr,"krijgt het nummer van de tram terug");
+    ENSURE(getLijnNr() == lijnNr,"krijgt het nummer van de tram terug");
 }
 
 int Tram::getSnelheid() {
@@ -104,15 +91,6 @@ Station *Tram::getHuidigeStation() {
     return this->huidigeStation;
 
     ENSURE(this->huidigeStation = huidigeStation,"krijgt de huidige station terug");
-}
-
-void Tram::setType(string t) {
-
-    REQUIRE(t == "PCC" or t == "Stadslijner" or t == "Albatros","dit is een type van een tram");
-
-    this->type = t;
-
-    ENSURE(this->type == t,"de tram heeft maar 3 types");
 }
 
 string Tram::getType() {
@@ -167,23 +145,11 @@ bool Tram::padIsVrij(Station *k) {
 
 bool Tram::move() {
 
-    if (reparatieDuur > 0) {
-        reparatieDuur--;
-        return false;
-    }
-
     Station * kandidaat = getNextValidStation();
     bool padVrij = padIsVrij(kandidaat);
     if (padVrij) {
-        cout << "Tram " << this->getLijnNr() << " reed van Station " << getHuidigeStation()->getNaam() << " naar Station " << kandidaat->getNaam() << endl;
+        MetroExporter::tramMoved(this,kandidaat);
         setHuidigeStation(kandidaat);
-        aantalDefecten++;
-
-        if (aantalDefecten == maxDefecten) {
-            aantalDefecten = 0;
-            reparatieDuur = maxReparatieDuur;
-        }
-
         return true;
     }
     else {
@@ -201,7 +167,7 @@ void Tram::reset() {
     ENSURE(huidigeStation == beginStation,"het zorgt ervoor dat de beginstation gereset wordt als de huidigestation");
 }
 
-void Tram::setMaxDefecten(int d) {
+void PCC::setMaxDefecten(int d) {
 
     REQUIRE(d >= 0,"dit moet een positieve getal zijn mag zelf ook 0 zijn");
 
@@ -210,11 +176,42 @@ void Tram::setMaxDefecten(int d) {
     ENSURE(maxDefecten == d,"het maximaal aantal keren dat de tram in panne mag vallen");
 }
 
-void Tram::setMaxReparatieDuur(int r) {
+void PCC::setMaxReparatieDuur(int r) {
 
     REQUIRE(r >= 0,"dit moet een positieve getal zijn mag zelf ook 0 zijn");
 
     maxReparatieDuur = r;
 
     ENSURE(maxReparatieDuur == r,"het maximaal aantal  stappen van de simulatie de tram moet wachten");
+}
+
+bool PCC::move() {
+    if (reparatieDuur > 0) {
+        reparatieDuur--;
+        return false;
+    }
+
+    Station * kandidaat = getNextValidStation();
+    bool padVrij = padIsVrij(kandidaat);
+    if (padVrij) {
+        MetroExporter::tramMoved(this,kandidaat);
+        setHuidigeStation(kandidaat);
+        aantalDefecten++;
+
+        if (aantalDefecten == maxDefecten) {
+            aantalDefecten = 0;
+            reparatieDuur = maxReparatieDuur;
+        }
+
+        return true;
+    }
+    else {
+        return false;
+    };
+}
+
+PCC::PCC(int lijnNr): Tram(lijnNr) {
+    aantalDefecten = 0;
+    reparatieDuur = 0;
+    type = "PCC";
 }

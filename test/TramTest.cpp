@@ -9,6 +9,8 @@ using namespace std;
 
 class TramTest: public ::testing::Test {
 protected:
+    TramTest() {}
+
     friend class Tram;
     // You should make the members protected s.t. they can be
     // accessed from sub-classes.
@@ -21,14 +23,13 @@ protected:
 Tests the constructor.
 */
 TEST_F(TramTest, ConstructorTest) {
-    t = Tram(1,-1,1);
+    t = Tram(1);
     EXPECT_TRUE(t.getLijnNr() == 1);
     EXPECT_TRUE(t.getHuidigeStation() == NULL);
     EXPECT_TRUE(t.getBeginstation() == NULL);
 
-    EXPECT_DEATH(Tram(-1,-1,0),"LijnNr moet een positieve getal zijn");
-    EXPECT_DEATH(Tram(1,0,0),"aantaldefecten mag niet 0 zijn");
-    EXPECT_DEATH(Tram(1,-1,-1),"reparatietijd mag niet negatief zijn");
+    EXPECT_DEATH(Tram(-1), "LijnNr moet een positieve getal zijn");
+
 }
 
 

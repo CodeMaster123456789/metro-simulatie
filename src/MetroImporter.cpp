@@ -29,16 +29,17 @@ SuccessEnum MetroImporter::importMetro(
 	SuccessEnum endResult = Success;
 
 	REQUIRE(simulatie.properlyInitialized(), "Metro simulatie wasn't initialized");
-	
-	if(!doc.LoadFile(inputfilename)) {
-		errStream << "XML IMPORT ABORTED: " << doc.ErrorDesc() << endl;
-		return ImportAborted;
-	};
+    bool fileLoaded = doc.LoadFile (inputfilename);
+    REQUIRE(fileLoaded,"00:file failed to load");
+
     TiXmlElement * root = doc.RootElement();
+    REQUIRE(root->NextSiblingElement() == NULL,"01:more root elements");
+
     TiXmlElement * child = root->FirstChildElement();
 
     while (child != NULL) {                                                   // hier leggen we uit hoe de XLM-file eruit ziet.
         string Elementnaam = child->ValueStr();                                  // Wat er allemaal op de XLM-geschreven staat leggen we stap per stap uit.
+        REQUIRE(Elementnaam == "TRAM" or Elementnaam == "STATION","02:Element not Tram of Station");
         if (Elementnaam == "STATION") {                                          // Als er van boven Metro staat noemen we dat de root van de file.
                                                                                  // Daarna komt het volgende element.
             string naam = child->FirstChildElement("naam")->GetText();     // Dat element noemt men de Child.
@@ -47,10 +48,18 @@ SuccessEnum MetroImporter::importMetro(
             int spoornummer = atoi(spoor);                                   // Hiervoor gaan we ze eerst alles benoemen tot wat ze behoren.
             Station * s = simulatie.findStation(naam);                           // We zeggen dan bijvoorbeeld dat na de Naam gedeelte zijn argumeng komt.
             if (s == NULL) {                                                  // en zo voor al de variabelen.
-                s = new Station(naam,spoornummer);
+
+                if (type == "Halte") {
+                    s = new Halte(naam,spoornummer);
+                }
+                else if (type == "Metrostation") {
+                    s = new Metrostation(naam,spoornummer);
+                }
+                else {
+                    s = new Station(naam,spoornummer);
+                }
                 simulatie.addStation(s);
             }
-            s->setType(type);
             string volgende = child->FirstChildElement("volgende")->GetText();
             string vorige = child->FirstChildElement("vorige")->GetText();
             Station * vol = simulatie.findStation(volgende);
@@ -81,18 +90,28 @@ SuccessEnum MetroImporter::importMetro(
             TiXmlElement * defectElement = child->FirstChildElement("aantalDefecten");
             TiXmlElement * reparatieElement = child->FirstChildElement("reparatieTijd");
 
-            Tram * tram = new Tram(lijn);
+            Tram * tram;
 
-            if (defectElement != NULL and reparatieElement != NULL) {
+            if (type == "PCC") {
+                PCC * pcc = new PCC(lijn);
                 int defecten = atoi(defectElement->GetText());
                 int reparatie = atoi(reparatieElement->GetText());
-                tram->setMaxDefecten(defecten);
-                tram->setMaxReparatieDuur(reparatie);
+                pcc->setMaxDefecten(defecten);
+                pcc->setMaxReparatieDuur(reparatie);
+                tram = pcc;
+            }
+            else if (type == "Albatros") {
+                tram = new Albatros(lijn);
+            }
+            else if (type == "Stadslijner") {
+                tram = new Stadlijner(lijn);
+            }
+            else {
+                tram = new Tram(lijn);
             }
 
             tram->setBeginstation(t);
             tram->setHuidigeStation(t);
-            tram->setType(type);
             simulatie.addTram(tram);
         }
 

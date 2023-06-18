@@ -40,7 +40,12 @@ set(TEST_SOURCE_FILES
 
 # Create TEST target
 add_executable(MetroTests ${SOURCE_FILES} ${TEST_SOURCE_FILES})
-
+add_custom_command(TARGET MetroTests PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/testInput $<TARGET_FILE_DIR:MetroTests>/testInput)
+add_custom_command(TARGET MetroTests PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/testOutput $<TARGET_FILE_DIR:MetroTests>/testOutput)
 
 # googletest subproject
 

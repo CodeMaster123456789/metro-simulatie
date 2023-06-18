@@ -53,10 +53,6 @@ Station *Station::getVorige() {                                         // Als i
     return this->vorige;
 }
 
-void Station::setType(string t) {
-    this->type = t;
-}
-
 string Station::getType() {
     return this->type;
 }

@@ -16,15 +16,11 @@ using namespace std;
 
 class Tram {
     // hier geef ik alle variabelen weer voor Tram
-private:
+protected:
     int lijnNr;
     Station * beginStation;
     Station * huidigeStation;
     string type;
-    int maxDefecten;
-    int aantalDefecten;
-    int maxReparatieDuur;
-    int reparatieDuur;
     Station * getNextValidStation();
     bool padIsVrij(Station *k);
 public:
@@ -42,7 +38,7 @@ public:
      * REQUIRE(aantalDefecten != 0, "aantaldefecten mag niet 0 zijn");
      * REQUIRE(reparatieTijd >= 0, "reparatietijd mag niet negatief zijn");
      *
-     * ENSURE(this->lijnNr == lijnNr, "lijnNR is correct ingestelt");
+     * ENSURE(getLijnNr() == lijnNr, "lijnNR is correct ingestelt");
      * ENSURE(this->maxDefecten == aantalDefecten, "maxDefecten is correct ingestelt");
      * ENSURE(this->maxReparatieDuur == reparatieTijd, "maxReparatieDuur is correct ingestelt");
      * ENSURE(this->beginStation == nullptr, "tram heeft geen beginstation");
@@ -50,7 +46,7 @@ public:
      *
      */
 
-    Tram(int lijnNr, int aantalDefecten = -1, int reparatieTijd = 0);                                         // ectra functies die ik ga gebruiken voor de variabelen.
+    Tram(int lijnNr);                                         // ectra functies die ik ga gebruiken voor de variabelen.
 
     /**
     * Tram constructor zonder een argument
@@ -63,7 +59,9 @@ public:
 
     /**
      *
-     * @return lijnNr nummer van de lijn
+     * @param lijn de nummer van de tram
+     *
+     * REQUIRE(lijn <= 0,lijn is de nummer van de tram)
      */
 
     void setLijnNr(int lijn);
@@ -77,7 +75,7 @@ public:
 
     /**
      *
-     * @return lijnNr nummer van de lijn
+     * @return getLijnNr == lijnNr
      */
 
     int getSnelheid();
@@ -91,14 +89,38 @@ public:
     Station * getBeginstation();
     void setHuidigeStation(Station * startpunt);
     Station * getHuidigeStation();
-    void setType(string type);
     string getType();
     bool checkCompatible(Station * a);
-    bool move();
+    virtual bool move();
     void reset();
+};
+
+class PCC:public Tram {
+
+    int maxDefecten;                                            //TODO get en set maken voor de 4 int
+    int aantalDefecten;
+    int maxReparatieDuur;
+    int reparatieDuur;
+
+public:
+    PCC(int lijnNr);
+     bool move();
     void setMaxDefecten(int d);
     void setMaxReparatieDuur(int r);
 };
 
+class Stadlijner:public Tram {
+public:
+    Stadlijner(int lijnNr) : Tram(lijnNr) {
+        type = "Stadslijner";
+    }
+};
+
+class Albatros:public Tram {
+public:
+    Albatros(int lijnNr) : Tram(lijnNr) {
+        type = "Albatros";
+    }
+};
 
 #endif //METRO_SIMULATIE_TRAM_H

@@ -40,3 +40,7 @@ void MetroExporter::simpleUitvoer(const char *pad, Metro &simulatie) {          
 
     MyFile.close();
 }
+
+void MetroExporter::tramMoved(Tram *t, Station *s) {
+    cout << "Tram " << t->getLijnNr() << " reed van Station " << t->getHuidigeStation()->getNaam() << " naar Station " << s->getNaam() << endl;
+}

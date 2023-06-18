@@ -11,7 +11,7 @@ using namespace std;
 class Metro;
 
 class Station {
-private:
+protected:
     string naam;                                                    // hier zitten al de variabelen die nodig zijn voor Station
     Station * volgende;
     Station * vorige;
@@ -31,11 +31,29 @@ public:
     Station * getVolgende();
     void setVorige(Station * previous);
     Station * getVorige();
-    void setType(string type);
     string getType();
     Tram *getHuidigeTram();
 
 };
 
+class Halte:public Station{
+public:
+    Halte():Station() {
+        type = "Halte";
+    }
+    Halte(string naam, int spoorNr):Station(naam,spoorNr) {
+        type = "Halte";
+    }
+};
+
+class Metrostation:public Station{
+public:
+    Metrostation():Station() {
+        type = "Metrostation";
+    }
+    Metrostation(string naam, int spoorNr):Station(naam,spoorNr) {
+        type = "Metrostation";
+    }
+};
 
 #endif //METRO_SIMULATIE_STATION_H

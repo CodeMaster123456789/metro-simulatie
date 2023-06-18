@@ -19,6 +19,7 @@ public:
 
 	bool properlyInitialized();
     void simpleUitvoer(const char *pad, Metro & simulatie);
+    static void tramMoved(Tram * t,Station * s);
 
 private:
 	MetroExporter * _initCheck; //!use pointer to myself to verify whether I am properly initialized

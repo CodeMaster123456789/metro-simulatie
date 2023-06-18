@@ -8,6 +8,7 @@ using namespace std;
 #include "../src/Metro.h"
 #include "../src/MetroUtils.h"
 #include "../src/MetroImporter.h"
+#include "../src/MetroExporter.h"
 
 class MetroInputTest: public ::testing::Test {
 protected:
@@ -28,7 +29,19 @@ Tests InputHappyDay
 TEST_F(MetroInputTest, InputHappyDay) {
 	ASSERT_TRUE(DirectoryExists("testInput"));
 
-	ofstream myfile;
-	//SuccessEnum importResult;
+    Metro metro;
+    MetroImporter importer;
+    EXPECT_TRUE(importer.importMetro("testInput/test.xml",cerr,metro)== Success);
 
+
+}
+
+TEST_F(MetroInputTest, importtest){
+    Metro metro;
+    MetroImporter importer;
+    EXPECT_DEATH(importer.importMetro("k",cerr,metro),"00");
+
+    EXPECT_DEATH(importer.importMetro("testInput/test01.xml",cerr,metro),"01");
+
+    EXPECT_DEATH(importer.importMetro("testInput/test02.xml",cerr,metro),"02");
 }
