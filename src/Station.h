@@ -21,22 +21,22 @@ public:
 
     static Metro * sim;
 
-    Station();                                                      // dit zijn extra functies
-    Station(string naam, int spoorNr);                              // die gebruiken we om onze output makelijker te laten printen
-    void setSpoorNr(int spoor);
-    int getSpoorNr();
-    void setNaam(string naam);
-    string getNaam();
-    void setVolgende(Station * next);
-    Station * getVolgende();
-    void setVorige(Station * previous);
-    Station * getVorige();
-    string getType();
-    Tram *getHuidigeTram();
+    Station();                                                      // ensuire:
+    Station(string naam, int spoorNr);                              // Require en ensuire
+    void setSpoorNr(int spoor);                                     // require en insuire
+    int getSpoorNr();                                               // insuire
+    void setNaam(string naam);                                      // require en insuire
+    string getNaam();                                               // insuire
+    void setVolgende(Station * next);                               // require en insuire
+    Station * getVolgende();                                        // insuire
+    void setVorige(Station * previous);                             // require en insuire
+    Station * getVorige();                                          // insuire
+    string getType();                                               // insuire
+    Tram *getHuidigeTram();                                         // insuire
 
 };
 
-class Halte:public Station{
+class Halte:public Station{                                                 // neem de require en ensuire over van station
 public:
     Halte():Station() {
         type = "Halte";

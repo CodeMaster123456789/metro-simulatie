@@ -1,0 +1,9 @@
+*.html
+*.js
+*.css
+*.tex
+*.png
+*.svg
+*.eps
+*.sty
+Makefile

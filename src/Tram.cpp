@@ -208,6 +208,8 @@ bool PCC::move() {
     else {
         return false;
     };
+
+    ENSURE(PCC::move() == type, "het hangt af over welke type tram het gaat want het veranderd van raparatieduur.")
 }
 
 PCC::PCC(int lijnNr): Tram(lijnNr) {

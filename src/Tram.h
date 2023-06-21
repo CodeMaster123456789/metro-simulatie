@@ -13,7 +13,9 @@ class Metro;
 
 using namespace std;
 
-
+/**
+ * @brief stelt onze tram voor
+ */
 class Tram {
     // hier geef ik alle variabelen weer voor Tram
 protected:
@@ -31,16 +33,10 @@ public:
      * Tram constructor
      *s
      * @param lijnNr lijnnummer van de tram
-     * @param aantalDefecten om de hoeveel station valt de tram in panne,als dit negatief is valt de tram nooit in panne
-     * @param reparatieTijd na hoeveel tijd is de tram gerepareerd
      *
      * REQUIRE(lijnNr >= 0, "LijnNr moet een positieve getal zijn");
-     * REQUIRE(aantalDefecten != 0, "aantaldefecten mag niet 0 zijn");
-     * REQUIRE(reparatieTijd >= 0, "reparatietijd mag niet negatief zijn");
      *
      * ENSURE(getLijnNr() == lijnNr, "lijnNR is correct ingestelt");
-     * ENSURE(this->maxDefecten == aantalDefecten, "maxDefecten is correct ingestelt");
-     * ENSURE(this->maxReparatieDuur == reparatieTijd, "maxReparatieDuur is correct ingestelt");
      * ENSURE(this->beginStation == nullptr, "tram heeft geen beginstation");
      * ENSURE(this->huidigeStation == nullptr, "tram heeft geen huidigestation");
      *
@@ -85,14 +81,14 @@ public:
      * @param beginpunt
      */
 
-    void setBeginstation(Station * beginpunt);
-    Station * getBeginstation();
-    void setHuidigeStation(Station * startpunt);
-    Station * getHuidigeStation();
-    string getType();
-    bool checkCompatible(Station * a);
-    virtual bool move();
-    void reset();
+    void setBeginstation(Station * beginpunt);                      // Require niet nul, ensuire: getbeginstation is gelijk aan beginpunt
+    Station * getBeginstation();                                    // geen Require, ensuire: Station is niet null
+    void setHuidigeStation(Station * startpunt);                    // require: startpunt die nul is , ensuire: gethuidigestation is gelijk aan startpunt
+    Station * getHuidigeStation();                                  // ensuire:
+    string getType();                                               // ensuire:
+    bool checkCompatible(Station * a);                              // require: en ensuire:
+    virtual bool move();                                            // ensuire: true en false
+    void reset();                                                   // ensuire:
 };
 
 class PCC:public Tram {
@@ -103,6 +99,21 @@ class PCC:public Tram {
     int reparatieDuur;
 
 public:
+
+    /**
+     * Tram constructor
+     *s
+     * @param lijnNr lijnnummer van de tram
+     *
+     * REQUIRE(lijnNr >= 0, "LijnNr moet een positieve getal zijn");
+     *
+     * ENSURE(getLijnNr() == lijnNr, "lijnNR is correct ingestelt");
+     *
+     * ENSURE(this->beginStation == nullptr, "tram heeft geen beginstation");
+     * ENSURE(this->huidigeStation == nullptr, "tram heeft geen huidigestation");
+     *
+     */
+
     PCC(int lijnNr);
      bool move();
     void setMaxDefecten(int d);
@@ -111,6 +122,21 @@ public:
 
 class Stadlijner:public Tram {
 public:
+
+    /**
+     * Tram constructor
+     *s
+     * @param lijnNr lijnnummer van de tram
+     *
+     * REQUIRE(lijnNr >= 0, "LijnNr moet een positieve getal zijn");
+     *
+     * ENSURE(getLijnNr() == lijnNr, "lijnNR is correct ingestelt");
+     *
+     * ENSURE(this->beginStation == nullptr, "tram heeft geen beginstation");
+     * ENSURE(this->huidigeStation == nullptr, "tram heeft geen huidigestation");
+     *
+     */
+
     Stadlijner(int lijnNr) : Tram(lijnNr) {
         type = "Stadslijner";
     }
@@ -118,6 +144,21 @@ public:
 
 class Albatros:public Tram {
 public:
+
+    /**
+     * Tram constructor
+     *s
+     * @param lijnNr lijnnummer van de tram
+     *
+     * REQUIRE(lijnNr >= 0, "LijnNr moet een positieve getal zijn");
+     *
+     * ENSURE(getLijnNr() == lijnNr, "lijnNR is correct ingestelt");
+     *
+     * ENSURE(this->beginStation == nullptr, "tram heeft geen beginstation");
+     * ENSURE(this->huidigeStation == nullptr, "tram heeft geen huidigestation");
+     *
+     */
+
     Albatros(int lijnNr) : Tram(lijnNr) {
         type = "Albatros";
     }

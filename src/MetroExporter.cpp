@@ -1,6 +1,7 @@
 #include <fstream>
 #include "../lib/DesignByContract.h"
 #include "MetroExporter.h"
+#include "MetroUtils.h"
 
 using namespace std;
 
@@ -18,6 +19,9 @@ bool MetroExporter::properlyInitialized() {
 
 void MetroExporter::simpleUitvoer(const char *pad, Metro &simulatie) {                   // dit geld voor de gedeelte van Station.
     ofstream MyFile(pad);                                                        // hier zegen we hoe de programma gelijk als op aade XLM file moet lezen.
+
+    REQUIRE(FileExists(pad), "moet een geldige pad zijn");
+
     MyFile << "--== STATIONS ==--" << endl;
     for (size_t i = 0; i < simulatie.getStationen().size();i++) {                   // we zeggen eerst wat de child element.
         Station *s = simulatie.getStationen()[i];                                   // dan voegen we erna zijn argument aan toe.
