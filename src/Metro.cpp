@@ -36,7 +36,7 @@ void Metro::addStation(Station *s) {                            // het zal de ar
 
     this->stationen.push_back(s);
 
-    ENSURE(s == new Station,"s is een nieuw station en wordt toegevoegd");
+    ENSURE(s,"s is een nieuw station en wordt toegevoegd");
 }
 
 void Metro::addTram(Tram *t) {                                  // het zal de argument voor de element Station toevoegen.
@@ -45,13 +45,13 @@ void Metro::addTram(Tram *t) {                                  // het zal de ar
 
     this->trammen.push_back(t);
 
-    ENSURE(t == new Tram,"t is een nieuwe tram die is toegevoed in de tram lijst");
+    ENSURE(t,"t is een nieuwe tram die is toegevoed in de tram lijst");
 
 }
 
 Station *Metro::findStation(string naam) {                      // het zoekt naar de element zijn argument
 
-    REQUIRE(naam == "","deze naam wordt gebruikt om mee te zoeken");
+    REQUIRE("","deze naam wordt gebruikt om mee te zoeken");
 
     for (size_t i = 0; i < stationen.size();i++) {              // bijvoorbeeld het argument van het element was A
         Station * s = stationen [i];                            // bij de nieuwe benaming gaan die naar het laaste bekeken argument bekijken
