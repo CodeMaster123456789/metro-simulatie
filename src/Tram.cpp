@@ -58,7 +58,9 @@ int Tram::getSnelheid() {
         return 70;
     }
 
-    ENSURE(this->type == type,"krijgt de snelheid van de tram bepaalt door de type");
+    ENSURE(this->type == "PCC","de snelheid van PCC is 40 km/h");
+    ENSURE(this->type == "Stadslijner", "de snelheid van Stadslijner is 70 km/h");
+    ENSURE(this->type == "Albatros", "de snelheid van Albatros is 70 km/h");
 }
 
 void Tram::setBeginstation(Station *beginpunt) {
@@ -74,7 +76,7 @@ Station *Tram::getBeginstation() {
 
     return this->beginStation;
 
-    ENSURE(this->beginStation = beginStation,"krijgt de beginstation terug");
+    ENSURE(getBeginstation() == beginStation,"krijgt de beginstation terug");
 }
 
 void Tram::setHuidigeStation(Station *startpunt) {
@@ -209,11 +211,18 @@ bool PCC::move() {
         return false;
     };
 
-    ENSURE(PCC::move() == type, "het hangt af over welke type tram het gaat want het veranderd van raparatieduur.")
+    ENSURE(PCC::move() == true, "de tram mag zich voortbewegen omdat de situatie onder controle is");
+    ENSURE(PCC::move() == false,"de tram mag niet verder bewegen want aangezien de situatie staat er een tram voor zich dat moet gerepareed worden");
 }
 
 PCC::PCC(int lijnNr): Tram(lijnNr) {
+
+    REQUIRE(lijnNr >= 0,"de lijnNr mag geen negatief getal zijn");
+
     aantalDefecten = 0;
     reparatieDuur = 0;
     type = "PCC";
+
+    ENSURE(type == "PCC","door de gegeven lijnNR kunnen we al weten of wat de type van de tram is en vandaaruit de defecten en reparaties zien en de PCC tram is de enige die nood heeft daaraan.");
+
 }

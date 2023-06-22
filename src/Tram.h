@@ -79,14 +79,70 @@ public:
     /**
      *
      * @param beginpunt
+     *
+     * REQUIRE(beginpunt,"beginpunt is waar de vertrekpunt is van de tram")
+     *
+     * ENSURE(this->beginStation = beginpunt,"dit zal ook de start zijn van de tram")
      */
 
     void setBeginstation(Station * beginpunt);                      // Require niet nul, ensuire: getbeginstation is gelijk aan beginpunt
+
+    /**
+     *
+     * @return beginstation
+     *
+     * ENSURE(getBeginstation() == beginStation,"krijgt de beginstation terug")
+     */
+
     Station * getBeginstation();                                    // geen Require, ensuire: Station is niet null
+
+    /**
+     *
+     * @param startpunt dit is de punt vanwaar de tram zal starten met te bewegen
+     *
+     * REQUIRE(startpunt,"dit is de station waar de tram gelegen is")
+     *
+     * ENSURE(this->huidigeStation = startpunt,"de huidige station is de plek waar de tram nu gelegen is")
+     */
+
     void setHuidigeStation(Station * startpunt);                    // require: startpunt die nul is , ensuire: gethuidigestation is gelijk aan startpunt
+
+    /**
+     *
+     * @return huidigeStation geef jouw de huidigestation weer
+     *
+     * ENSURE(this->huidigeStation = huidigeStation,"krijgt de huidige station terug")
+     */
+
     Station * getHuidigeStation();                                  // ensuire:
+
+    /**
+     *
+     * @return type: geeft weer wat de type is van de tram
+     *
+     * ENSURE(this->type == type,"krijgt de type van de tram terug")
+     */
+
     string getType();                                               // ensuire:
+
+    /**
+     *
+     * @param a de station die geldig is voor de gegeven tram
+     * @return true: de station waar de tram naartoe gaat is toegestaan.
+     * @return false: de station waar de tram naartoe gaat is niet toegestaan.
+     */
+
     bool checkCompatible(Station * a);                              // require: en ensuire:
+
+    /**
+     *
+     * @return true: de tram is toegestaan om zich te bewegen
+     * @return false: de tram is niet toegestaan om zich te bewegen
+     *
+     * ENSURE(padVrij == true,"de tram kan bewegen naar de volgende station")
+     * ENSURE(padVrij == false,"de tram kan niet bewegen naar de volgende station")
+     */
+
     virtual bool move();                                            // ensuire: true en false
     void reset();                                                   // ensuire:
 };
@@ -115,7 +171,7 @@ public:
      */
 
     PCC(int lijnNr);
-     bool move();
+    bool move();
     void setMaxDefecten(int d);
     void setMaxReparatieDuur(int r);
 };

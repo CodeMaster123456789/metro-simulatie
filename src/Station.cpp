@@ -10,16 +10,13 @@ Metro * Station::sim = NULL;
 
 Station::Station() {                                                    // deze gegevens zet ik als mijn defaults.
 
-    REQUIRE(this->getNaam() == "", "dit moet de naam van de Station zijn");
-    REQUIRE(this->getSpoorNr() >= 0, "de nummer van de spoorlijn");
-
     this->naam = "";
     this->spoorNr = -1;
     this->volgende = NULL;
     this->vorige = NULL;
 
     ENSURE(getNaam() == "", "dit wordt de naam van de Station");
-    ENSURE(getSpoorNr() == spoorNr, "dit wordt de nummer van de spoor");
+    ENSURE(getSpoorNr() == spoorNr, "dit is een standaard waarde");
     ENSURE(getVolgende() == NULL, "de volgende zal door middel van de gegeven de tram de volgende halte weergeven");
     ENSURE(getVorige() == NULL, "de vorige zal door middel van de gegeven tram de vorige weergeven");
 
@@ -27,8 +24,8 @@ Station::Station() {                                                    // deze 
 
 Station::Station(string naam, int spoorNr) {                            // hier geeft ik de gegevens een beginwaarde weer.
 
-    REQUIRE(this->getNaam() == naam, "de naam van de tram");
-    REQUIRE(this->getSpoorNr() == spoorNr, "de nummer van de spoor");
+    REQUIRE(spoorNr >= 0, "de nummer van de spoor");
+    REQUIRE(this->naam == "","een naam voor de station zelf");
 
     this->naam = naam;
     this->spoorNr = spoorNr;
@@ -44,7 +41,7 @@ Station::Station(string naam, int spoorNr) {                            // hier 
 
 void Station::setSpoorNr(int spoor) {                                   // hier noem ik spoor als het argument voor spoorNr.
 
-    REQUIRE(getSpoorNr() == spoor, "dit is de nummer van de spoor");
+    REQUIRE(getSpoorNr() >= 0, "het getal moet niet negatief zijn");
 
     this->spoorNr = spoor;
 
@@ -77,10 +74,12 @@ string Station::getNaam() {                                             // Als i
 
 }
 
-void Station::setVolgende(Station *next) {                              // hier zeg ik dat next mijn argument is voor naam.
+void Station::setVolgende(Station *next) {
+    REQUIRE(next, "de next is de volgende station van de gegeven huidige station");
+
     this->volgende = next;
 
-    ENSURE(getVorige() == next, "dit geeft jouw de Station die de tram nog moet paseren");
+    ENSURE(getVolgende() == next, "dit geeft jouw de Station die de tram nog moet paseren");
 
 }
 
@@ -91,21 +90,25 @@ Station *Station::getVolgende() {                                       // Als i
 
 }
 
-void Station::setVorige(Station *previous) {                            // hier zeg ik dat previous mijn argument is voor vorige.
+void Station::setVorige(Station *previous) {
+    REQUIRE(previous,"dit geeft de vorige station weer");
+
     this->vorige = previous;
 
-    ENSURE(getVorige() == previous, "dit geeft u de gepaseerde station weer");
+    ENSURE(vorige == previous, "dit geeft u de gepaseerde station weer");
 }
 
 Station *Station::getVorige() {                                         // Als ik dit oproep geeft het mij de text voor vorige weer.
     return this->vorige;
 
-    ENSURE()
+    ENSURE(getVorige() == vorige,"de vorige geeft jouw de bezochte station weer");
 
 }
 
 string Station::getType() {
     return this->type;
+
+    ENSURE(getType() == type, "het geeft jouw de type van de tram");
 }
 
 Tram *Station::getHuidigeTram() {
