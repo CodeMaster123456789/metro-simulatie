@@ -98,7 +98,7 @@ void Metro::simulate(int eindtijd) {
     REQUIRE(eindtijd >= 0,"moet geen negatief getal zijn");
 
     while (tijdstip < eindtijd) {
-        cout << "=== " << getTijd() << " ===" << endl;
+        cout << "=== " << getTijd() << " ===" << endl;                                          // moet naar de metroexporter
         moveTrams();
         tijdstip++;
         cout << endl;
