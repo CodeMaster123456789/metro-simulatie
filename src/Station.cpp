@@ -95,7 +95,7 @@ void Station::setVorige(Station *previous) {
 
     this->vorige = previous;
 
-    ENSURE(vorige == previous, "dit geeft u de gepaseerde station weer");
+    ENSURE(getVorige() == previous, "dit geeft u de gepaseerde station weer");
 }
 
 Station *Station::getVorige() {                                         // Als ik dit oproep geeft het mij de text voor vorige weer.

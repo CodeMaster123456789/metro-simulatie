@@ -19,8 +19,8 @@ Tram::Tram(int lijnNr) {
     this->huidigeStation = NULL;
 
     ENSURE(getLijnNr() == lijnNr, "lijnNR is correct ingestelt");
-    ENSURE(this->beginStation == NULL, "tram heeft geen beginstation");
-    ENSURE(this->huidigeStation == NULL, "tram heeft geen huidigestation");
+    ENSURE(this->getBeginstation() == NULL, "tram heeft geen beginstation");
+    ENSURE(this->getHuidigeStation() == NULL, "tram heeft geen huidigestation");
 
 }
 
@@ -30,9 +30,9 @@ Tram::Tram() {
     this->beginStation = NULL;
     this->huidigeStation = NULL;
 
-    ENSURE(this->lijnNr == -1,"lijnNr heeft een standaard constante -1");
-    ENSURE(this->beginStation == NULL, "tram heeft geen beginstation");
-    ENSURE(this->huidigeStation == NULL, "tram heeft geen huidigestation");
+    ENSURE(this->getLijnNr() == -1,"lijnNr heeft een standaard constante -1");
+    ENSURE(this->getBeginstation() == NULL, "tram heeft geen beginstation");
+    ENSURE(this->getHuidigeStation() == NULL, "tram heeft geen huidigestation");
 }
 
 void Tram::setLijnNr(int lijn) {
@@ -58,9 +58,9 @@ int Tram::getSnelheid() {
         return 70;
     }
 
-    ENSURE(this->type == "PCC","de snelheid van PCC is 40 km/h");
-    ENSURE(this->type == "Stadslijner", "de snelheid van Stadslijner is 70 km/h");
-    ENSURE(this->type == "Albatros", "de snelheid van Albatros is 70 km/h");
+    ENSURE(getType() == "PCC","de snelheid van PCC is 40 km/h");
+    ENSURE(getType() == "Stadslijner", "de snelheid van Stadslijner is 70 km/h");
+    ENSURE(getType() == "Albatros", "de snelheid van Albatros is 70 km/h");
 }
 
 void Tram::setBeginstation(Station *beginpunt) {
@@ -69,7 +69,7 @@ void Tram::setBeginstation(Station *beginpunt) {
 
     this->beginStation = beginpunt;
 
-    ENSURE(this->beginStation = beginpunt,"dit zal ook de start zijn van de tram");
+    ENSURE(getBeginstation() == beginpunt,"dit zal ook de start zijn van de tram");
 }
 
 Station *Tram::getBeginstation() {
@@ -85,21 +85,21 @@ void Tram::setHuidigeStation(Station *startpunt) {
 
     this->huidigeStation = startpunt;
 
-    ENSURE(this->huidigeStation = startpunt,"de huidige station is de plek waar de tram nu gelegen is");
+    ENSURE(getHuidigeStation() == startpunt,"de huidige station is de plek waar de tram nu gelegen is");
 }
 
 Station *Tram::getHuidigeStation() {
 
     return this->huidigeStation;
 
-    ENSURE(this->huidigeStation = huidigeStation,"krijgt de huidige station terug");
+    ENSURE(getHuidigeStation() == huidigeStation,"krijgt de huidige station terug");
 }
 
 string Tram::getType() {
 
     return this->type;
 
-    ENSURE(this->type == type,"krijgt de type van de tram terug");
+    ENSURE(getType() == type,"krijgt de type van de tram terug");
 }
 
 bool Tram::checkCompatible(Station *a) {
@@ -166,7 +166,7 @@ void Tram::reset() {
 
     huidigeStation = beginStation;
 
-    ENSURE(huidigeStation == beginStation,"het zorgt ervoor dat de beginstation gereset wordt als de huidigestation");
+    ENSURE(getHuidigeStation() == getBeginstation(),"het zorgt ervoor dat de beginstation gereset wordt als de huidigestation");
 }
 
 void PCC::setMaxDefecten(int d) {
