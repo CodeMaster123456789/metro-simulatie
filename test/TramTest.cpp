@@ -16,13 +16,12 @@ protected:
     // accessed from sub-classes.
 
     Tram t;
-
 };
 
 /**
 Tests the constructor.
 */
-TEST_F(TramTest, ConstructorTest) {
+TEST_F(TramTest,ConstructorTest) {
     t = Tram(1);
     EXPECT_TRUE(t.getLijnNr() == 1);
     EXPECT_TRUE(t.getHuidigeStation() == NULL);
@@ -32,6 +31,11 @@ TEST_F(TramTest, ConstructorTest) {
 
 }
 
+TEST_F(TramTest,TramConstructor) {
+    EXPECT_TRUE(t.getLijnNr() == -1);
+    EXPECT_TRUE(t.getBeginstation() == NULL);
+    EXPECT_TRUE(t.getHuidigeStation() == NULL);
+}
 
 //
 // Created by tigok on 4/05/2023.

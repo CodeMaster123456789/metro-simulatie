@@ -36,10 +36,10 @@ set(TEST_SOURCE_FILES
         test/TramTest.cpp
         test/MetroDomainTests.cpp
         test/MetroInputTests.cpp
-        test/MetroOutputTests.cpp)
+        test/MetroOutputTests.cpp test/StationTest.cpp)
 
 # Create TEST target
-add_executable(MetroTests ${SOURCE_FILES} ${TEST_SOURCE_FILES})
+add_executable(MetroTests ${SOURCE_FILES} ${TEST_SOURCE_FILES} test/StationTest.cpp)
 add_custom_command(TARGET MetroTests PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/testInput $<TARGET_FILE_DIR:MetroTests>/testInput)
